@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DevTools.Application\DevTools.Application.csproj" />
+    <ProjectReference Include="..\DevTools.Persistance\DevTools.Persistence.csproj" />
   </ItemGroup>
 
 

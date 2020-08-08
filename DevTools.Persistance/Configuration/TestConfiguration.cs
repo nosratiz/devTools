@@ -13,7 +13,8 @@ namespace DevTools.Persistence.Configuration
 
             builder.Property(e => e.Name).IsRequired();
 
-            builder.Property(e => e.ContentType).IsRequired().HasDefaultValue(ContentType.ApplicationJson);
+            builder.Property(e => e.ContentType).IsRequired()
+                .HasDefaultValue(ContentType.ApplicationJson);
 
             builder.Property(e => e.CreateDate).IsRequired();
 

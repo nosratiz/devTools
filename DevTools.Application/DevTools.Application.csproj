@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\AutoMapper\" />
     <Folder Include="Common\Validator\" />
     <Folder Include="Account\" />
     <Folder Include="Users\" />
