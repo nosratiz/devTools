@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using DevTools.Application.Common.Interfaces;
 using MediatR;
-using Sepid.Notification.Application.System;
 
 namespace DevTools.Application.System
 {

@@ -6,16 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevTools.Persistence.Context
 {
-    public class DevToolsDb : DbContext, IDevToolsDb
+    public class DevToolsDb : DbContext, IDevToolsDbContext
     {
         public DevToolsDb()
         {
-
         }
 
         public DevToolsDb(DbContextOptions<DevToolsDb> options) : base(options)
         {
-
         }
 
         public virtual DbSet<User> Users { get; set; }

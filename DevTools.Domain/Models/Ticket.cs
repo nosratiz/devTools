@@ -8,7 +8,7 @@ namespace DevTools.Domain.Models
     {
         public Ticket()
         {
-            Tickets = new HashSet<Ticket>();
+            Children = new HashSet<Ticket>();
         }
 
         public Guid Id { get; set; }
@@ -29,7 +29,7 @@ namespace DevTools.Domain.Models
 
         public virtual User User { get; set; }
         public virtual Ticket Parent { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; }
+        public virtual ICollection<Ticket> Children { get; }
 
     }
 }

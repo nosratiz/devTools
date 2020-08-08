@@ -8,7 +8,13 @@ namespace DevTools.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<Setting> builder)
         {
-            throw new System.NotImplementedException();
+            builder.Property(e => e.Id).IsRequired().HasColumnName("SettingId");
+
+            builder.Property(e => e.Title).IsRequired();
+
+            builder.Property(e => e.CopyRight).IsRequired();
+
+            builder.Property(e => e.Logo).IsRequired();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace DevTools.Persistence
             services.AddDbContext<DevToolsDb>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DevToolsContext")));
 
-            services.AddScoped<IDevToolsDb>(provider => provider.GetService<DevToolsDb>());
+            services.AddScoped<IDevToolsDbContext>(provider => provider.GetService<DevToolsDb>());
 
             return services;
         }

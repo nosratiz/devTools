@@ -12,6 +12,7 @@ namespace DevTools.Domain.Models
             GroupTemplates = new HashSet<GroupTemplate>();
             Transactions = new HashSet<Transaction>();
             GroupTest = new HashSet<GroupTest>();
+            Tickets = new HashSet<Ticket>();
         }
 
         public Guid Id { get; set; }
@@ -38,6 +39,7 @@ namespace DevTools.Domain.Models
         public virtual ICollection<GroupTemplate> GroupTemplates { get; }
         public virtual ICollection<Transaction> Transactions { get; }
         public virtual ICollection<GroupTest> GroupTest { get; }
+        public virtual ICollection<Ticket> Tickets { get; }
 
     }
 }

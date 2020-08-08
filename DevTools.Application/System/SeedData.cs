@@ -2,7 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DevTools.Application.Common.Interfaces;
-using Newtonsoft.Json;
+using DevTools.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevTools.Application.System
 {
@@ -10,32 +11,25 @@ namespace DevTools.Application.System
     {
         private readonly IDevToolsDbContext _context;
 
-        public SeedData(IDevToolsDbContext Context)
+        public SeedData(IDevToolsDbContext context)
         {
-            _context = Context;
+            _context = context;
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken)
         {
-            if (!await _context.Notifiers.AnyAsync(cancellationToken))
+            if (!await _context.Users.AnyAsync(cancellationToken))
             {
-                await _context.Notifiers.AddAsync(new Notifier
+               await _context.Users.AddAsync(new User
                 {
-                    Name = "Nosrati",
-                    CreateDate = DateTime.Now,
-                    ServiceType = ServiceType.Smtp,
-                    Setting = JsonConvert.SerializeObject(new EmailSetting
-                    {
-                        From = "nimanosrati93@hotmail.com",
-                        Port = 587,
-                        UserName = "nimanosrati93@hotmail.com",
-                        Password = "0016057015nosrati@",
-                        Host = "smtp.live.com",
-                        EnableSsl = true
-                    })
-                }, cancellationToken);
+                    Id = Guid.NewGuid(),
+                    Name="Nima",
+                    Family="Nosrati",
+                    Email="nimanosrati93@gmail.com",
+                    
 
-                await _context.SaveAsync(cancellationToken);
+                });
+
             }
         }
     }

@@ -4,6 +4,7 @@ namespace DevTools.Domain.Models
 {
     public class UserApplication
     {
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
 
         public string SecretCode { get; set; }

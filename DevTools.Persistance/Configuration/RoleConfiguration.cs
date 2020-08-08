@@ -8,7 +8,11 @@ namespace DevTools.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            throw new System.NotImplementedException();
+            builder.Property(e => e.Id).HasColumnName("RoleId").IsRequired().UseIdentityColumn();
+
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Name).IsRequired();
         }
     }
 }
