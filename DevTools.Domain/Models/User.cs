@@ -27,6 +27,7 @@ namespace DevTools.Domain.Models
 
         public bool IsEmailConfirm { get; set; }
         public bool IsMobileConfirm { get; set; }
+        public bool IsDeleted { get; set; }
 
         public double Wallet { get; set; }
 
