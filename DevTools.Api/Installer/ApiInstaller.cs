@@ -1,14 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using AutoMapper;
 using DevTools.Application.Common.AutoMapper;
 using DevTools.Application.Common.Interfaces;
+using DevTools.Common.Options;
 using FluentValidation.AspNetCore;
 using Hangfire;
 using Hangfire.SqlServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace DevTools.Api.Installer
@@ -52,6 +56,41 @@ namespace DevTools.Api.Installer
             services.AddHangfireServer();
 
             #endregion HangFire
+        
+            #region AuthToken
+
+            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+
+            var jwtSetting = new JwtSettings();
+            configuration.Bind(nameof(JwtSettings), jwtSetting);
+            services.AddSingleton(jwtSetting);
+
+            var tokenValidationParameter = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.Secret)),
+                ValidateIssuer = false,
+                ValidIssuer = jwtSetting.ValidIssuer,
+
+                ValidAudience = jwtSetting.ValidAudience,
+                ValidateLifetime = true,
+                RequireExpirationTime = false
+            };
+            services.AddSingleton(tokenValidationParameter);
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(x =>
+                {
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = tokenValidationParameter;
+                });
+
+            #endregion AuthToken
 
             #region Automapper
 

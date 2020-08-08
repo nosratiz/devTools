@@ -1,4 +1,5 @@
 using DevTools.Api.Installer;
+using DevTools.Api.Middleware;
 using DevTools.Application;
 using DevTools.Persistence;
 using Hangfire;
@@ -20,7 +21,6 @@ namespace DevTools.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesAssembly(Configuration);
@@ -31,7 +31,6 @@ namespace DevTools.Api
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -44,6 +43,12 @@ namespace DevTools.Api
             app.UseRouting();
 
             app.UseCors("MyPolicy");
+
+
+            app.UseAccessControlAllowOriginAlways();
+
+            app.UseMiddleware<ApplicationMetaMiddleware>();
+            app.UseMiddleware<MembershipMiddleware>();
 
             app.UseAuthorization();
 
