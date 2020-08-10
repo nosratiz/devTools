@@ -14,7 +14,7 @@ namespace DevTools.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IMediator, Mediator>();
+            services.AddTransient<IMediator, Mediator>();
 
 
             #region Api Behavior

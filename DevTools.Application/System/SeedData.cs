@@ -78,6 +78,20 @@ namespace DevTools.Application.System
 
                 await _context.SaveAsync(cancellationToken);
             }
+
+            if (!await _context.Settings.AnyAsync(cancellationToken))
+            {
+                await _context.Settings.AddAsync(new Setting
+                {
+                    CopyRight = "copy Right by Dev Tools",
+                    Title = "DevTools",
+                    Description = "this site to help you to more concentrate on your code",
+                    Email = "info@devtools.com",
+                    Logo = ""
+                }, cancellationToken);
+
+                await _context.SaveAsync(cancellationToken);
+            }
         }
     }
 }

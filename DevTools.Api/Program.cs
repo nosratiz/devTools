@@ -35,10 +35,9 @@ namespace DevTools.Api
 
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
-                    .MinimumLevel.Warning()
+                    .MinimumLevel.Information()
                     .WriteTo.Seq(seriLogSetting.Address)
                     .CreateLogger();
-
                 Log.Information(" SeriLog Initialized on {Address} ... ", seriLogSetting.Address);
 
                 #endregion SeriLog

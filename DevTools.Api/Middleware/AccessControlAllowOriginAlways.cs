@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
 namespace DevTools.Api.Middleware
@@ -25,6 +26,14 @@ namespace DevTools.Api.Middleware
             });
 
             return _next(context);
+        }
+    }
+
+    public static class AccessControlAllowOriginAlwaysExtensions
+    {
+        public static IApplicationBuilder UseAccessControlAllowOriginAlways(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<AccessControlAllowOriginAlways>();
         }
     }
 }

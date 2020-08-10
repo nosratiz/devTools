@@ -30,6 +30,8 @@ namespace DevTools.Persistence.Configuration
 
             builder.Property(e => e.ExpiredDate).IsRequired();
 
+            builder.Property(e => e.IsDeleted).IsRequired().HasDefaultValue(false);
+
             builder.HasOne(e => e.Role)
             .WithMany(e => e.Users)
             .HasForeignKey(e => e.RoleId)

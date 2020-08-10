@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DevTools.Api.Middleware
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class ApplicationMetaMiddleware
+     public class ApplicationMetaMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly IRequestMeta _requestMeta;

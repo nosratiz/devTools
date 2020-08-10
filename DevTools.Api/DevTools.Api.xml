@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DevTools.Api</name>
+    </assembly>
+    <members>
+        <member name="M:DevTools.Api.Areas.Admin.SettingsController.GetSetting">
+            <summary>
+            setting Site
+            </summary>
+            <returns>Setting</returns>
+            <response code="200">if Setting exist </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.SettingsController.UpdateSetting(DevTools.Application.Settings.Command.UpdateSettingCommand)">
+            <summary>
+            update setting Site
+            </summary>
+            <returns>update Setting</returns>
+            <response code="200">if update Setting successfully </response>
+            <response code="400">if Validation Failed  </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.GetList(DevTools.Common.General.PagingOptions)">
+            <summary>
+            User List
+            </summary>
+            <param name="pagingOptions"></param>
+            <returns>User List</returns>
+            <response code="200">if Get List successfully </response>
+            <response code="404">If entity not found.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.GetUser(System.Guid)">
+            <summary>
+            User Profile
+            </summary>
+            <param name="id"></param>
+            <returns>User Profile</returns>
+            <response code="200">if Get successfully </response>
+            <response code="404">If entity not found.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.AddUser(DevTools.Application.Users.Command.CreateUser.CreateUserCommand)">
+            <summary>
+            Create User
+            </summary>
+            <param name="createUserCommand"></param>
+            <returns>NoContent</returns>
+            <response code="201">if Create successfully </response>
+            <response code="400">If validation failure.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.UpdateUser(DevTools.Application.Users.Command.UpdateUser.UpdateUserCommand)">
+            <summary>
+            Update User
+            </summary>
+            <param name="updateUserCommand"></param>
+            <returns>NoContent</returns>
+            <response code="200">if Update successfully </response>
+            <response code="400">If validation failure.</response>
+            <response code="404">If entity not found.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.DeleteUser(System.Guid)">
+            <summary>
+            Delete User
+            </summary>
+            <param name="id"></param>
+            <returns>NoContent</returns>
+            <response code="200">if Delete successfully </response>
+            <response code="404">If entity not found.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Common.AccountController.Login(DevTools.Application.Account.Auth.Command.LoginCommand)">
+            <summary>
+            login to Panel
+            </summary>
+            <param name="loginCommand"></param>
+            <returns>Access and refresh token.</returns>
+            <response code="200">if login successfully </response>
+            <response code="400">If validation failure.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="T:DevTools.Api.Middleware.OnExceptionMiddleware">
+            <summary>
+             OnExceptionMiddleware , Produce Custom message during Internal Server Exception
+            </summary>
+        </member>
+        <member name="M:DevTools.Api.Middleware.OnExceptionMiddleware.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="env"></param>
+        </member>
+        <member name="M:DevTools.Api.Middleware.OnExceptionMiddleware.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -49,7 +49,7 @@ namespace DevTools.Application.Account.Auth.Command
                 .FirstOrDefaultAsync(x => x.IsExpired == false
                                           && x.UserId == user.Id && x.ExpireDate.Date >= DateTime.Today, cancellationToken);
 
-            //if user already have token used exist token
+            //if user already have valid token in database
             if (userToken != null)
             {
                 return Result<TokenDto>.SuccessFul(new TokenDto

@@ -1,4 +1,5 @@
-﻿using DevTools.Application.Common.Interfaces;
+﻿using DevTools.Api.Core.Service;
+using DevTools.Application.Common.Interfaces;
 using DevTools.Application.Common.Service;
 using DevTools.Common.Helper;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +15,8 @@ namespace DevTools.Api.Installer
             services.AddSingleton<IRequestMeta, RequestMeta>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ITokenGenerator, TokenGenerator>();
+
+            services.AddTransient<ICurrentUserService, CurrentUserService>();
         }
     }
 }
