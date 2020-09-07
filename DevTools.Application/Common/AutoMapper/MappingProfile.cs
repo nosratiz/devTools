@@ -1,9 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
+using DevTools.Application.Templates.Dto;
+using DevTools.Application.Tickets.Command.ReplyTicketCommand;
+using DevTools.Application.Tickets.ModelDto;
+using DevTools.Application.Transactions.Dto;
+using DevTools.Application.UserApplications.Dto;
 using DevTools.Application.Users.Command.CreateUser;
 using DevTools.Application.Users.Command.UpdateUser;
 using DevTools.Application.Users.Model;
+using DevTools.Common.Enum;
 using DevTools.Domain.Models;
+using Newtonsoft.Json;
 
 namespace DevTools.Application.Common.AutoMapper
 {
@@ -11,6 +19,7 @@ namespace DevTools.Application.Common.AutoMapper
     {
         public MappingProfile()
         {
+
             CreateMap<User, UserDto>()
                 .ForMember(x => x.RoleName, opt => opt.MapFrom(des => des.Role.Name));
 
@@ -24,6 +33,32 @@ namespace DevTools.Application.Common.AutoMapper
 
 
             CreateMap<UpdateUserCommand, User>();
+
+
+            CreateMap<Ticket, TicketDto>().ForMember(x => x.FullName, opt => opt.MapFrom(des => $"{des.User.Name} {des.User.Family}"));
+
+            CreateMap<ReplyTicketCommand, Ticket>()
+                .ForMember(x => x.Id, opt => opt.MapFrom(des => Guid.NewGuid()))
+                .ForMember(x => x.CreateDate, opt => opt.MapFrom(des => DateTime.Now))
+                .ForMember(x => x.ModifiedDate, opt => opt.MapFrom(des => DateTime.Now))
+                .ForMember(x => x.TicketPriority, opt => opt.MapFrom(des => TicketPriority.Mediocre))
+                .ForMember(x => x.TicketStatus, opt => opt.MapFrom(des => TicketStatus.Open));
+
+
+            CreateMap<UserApplication, UserApplicationDto>().ForMember(x => x.RestrictIp,
+                opt => opt.MapFrom(des => JsonConvert.DeserializeObject<List<string>>(des.RestrictIp)));
+
+
+            CreateMap<GroupTemplate, GroupTemplateDto>();
+
+            CreateMap<Template, TemplateDto>();
+
+            CreateMap<Transaction, TransactionDto>();
+
+            CreateMap<Template, TemplateListDto>()
+                .ForMember(x => x.FullName,
+                    opt => opt.MapFrom(des => $"{des.GroupTemplate.User.Name} {des.GroupTemplate.User.Family}"))
+                .ForMember(x => x.GroupName, opt => opt.MapFrom(des => des.GroupTemplate.Name));
         }
     }
 }

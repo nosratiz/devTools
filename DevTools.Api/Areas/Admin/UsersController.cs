@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using DevTools.Application.Templates.Dto;
+using DevTools.Application.Templates.Queries;
+using DevTools.Application.UserApplications.Dto;
+using DevTools.Application.UserApplications.Queries;
 using DevTools.Application.Users.Command.CreateUser;
 using DevTools.Application.Users.Command.DeleteUser;
 using DevTools.Application.Users.Command.UpdateUser;
@@ -30,19 +35,21 @@ namespace DevTools.Api.Areas.Admin
         /// <param name="pagingOptions"></param>
         /// <returns>User List</returns>
         /// <response code="200">if Get List successfully </response>
-        /// <response code="404">If entity not found.</response>
         /// <response code="500">If an unexpected error happen</response>
         [ProducesResponseType(typeof(PagedList<UserDto>), 200)]
-        [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] PagingOptions pagingOptions)
-        => Ok(await _mediator.Send(new GetUserPagedListQuery
         {
-            Limit = pagingOptions.Limit,
-            Page = pagingOptions.Page,
-            Query = pagingOptions.Query
-        }));
+            var result = await _mediator.Send(new GetUserPagedListQuery
+            {
+                Limit = pagingOptions.Limit,
+                Page = pagingOptions.Page,
+                Query = pagingOptions.Query
+            });
+
+            return result.ApiResult;
+        }
 
 
         /// <summary>
@@ -96,7 +103,7 @@ namespace DevTools.Api.Areas.Admin
         /// <response code="400">If validation failure.</response>
         /// <response code="404">If entity not found.</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(ApiMessage),200)]
+        [ProducesResponseType(typeof(ApiMessage), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
@@ -122,9 +129,74 @@ namespace DevTools.Api.Areas.Admin
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var result = await _mediator.Send(new DeleteUserCommand {Id = id});
+            var result = await _mediator.Send(new DeleteUserCommand { Id = id });
 
             return result.ApiResult;
         }
+
+        /// <summary>
+        /// Return list of Group Template For User
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pagingOptions"></param>
+        /// <response code="200">Group Template List </response>
+        /// <response code="404">If entity not found.</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(PagedList<GroupTemplateDto>), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 404)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("{id}/groupTemplate")]
+        public async Task<IActionResult> GetUserGroupTemplate(Guid id, [FromQuery] PagingOptions pagingOptions)
+        {
+            var result = await _mediator.Send(new GetGroupTemplateListQuery
+            {
+                UserId = id,
+                Page = pagingOptions.Page,
+                Limit = pagingOptions.Limit,
+                Query = pagingOptions.Query
+            });
+
+            return result.ApiResult;
+        }
+
+
+        /// <summary>
+        /// Return list of templates for user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="groupId"></param>
+        /// <response code="200"> Template List </response>
+        /// <response code="404">If user not found or template.</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(List<TemplateDto>), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 404)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("{id}/groupTemplate/{groupId}/Templates")]
+        public async Task<IActionResult> GetUserGroupTemplate(Guid id, Guid groupId)
+        {
+            var result = await _mediator.Send(new GetUserTemplateListQuery { UserId = id, GroupTemplateId = groupId });
+
+            return result.ApiResult;
+        }
+
+
+        /// <summary>
+        /// Return list of Application Register 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200"> Application List </response>
+        /// <response code="404">If user not found .</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(List<UserApplicationDto>), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 404)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("{id}/Applications")]
+        public async Task<IActionResult> GetUserApplication(Guid id)
+        {
+            var result = await _mediator.Send(new GetUserApplicationListQuery { UserId = id });
+
+            return result.ApiResult;
+        }
+
     }
 }

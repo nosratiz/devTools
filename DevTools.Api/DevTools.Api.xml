@@ -21,6 +21,87 @@
             <response code="400">if Validation Failed  </response>
             <response code="500">If an unexpected error happen</response>
         </member>
+        <member name="M:DevTools.Api.Areas.Admin.TemplatesController.GetTemplates(DevTools.Application.Templates.Queries.GetTemplatePagedListQuery)">
+            <summary>
+            template List
+            </summary>
+            <response code="200">get list of template </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TemplatesController.Get(System.Guid)">
+            <summary>
+            Get Template
+            </summary>
+            <response code="200">get Template back</response>
+             <response code="404">if template not found </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TemplatesController.Delete(System.Guid)">
+            <summary>
+            Get Template
+            </summary>
+            <response code="204">get Template back</response>
+             <response code="404">if template not found </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TicketController.GetTicketList(DevTools.Application.Tickets.Queries.GetTicketPagedListQuery)">
+            <summary>
+            Ticket List
+            </summary>
+            <param name="filterTicketListQuery"></param>
+            <returns>Ticket List</returns>
+            <response code="200">if Get List successfully </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TicketController.GetTicket(System.Guid)">
+            <summary>
+            Get Ticket 
+            </summary>
+            <param name="id"></param>
+            <returns>Ticket </returns>
+            <response code="200">if ticket found successfully </response>
+            <response code="404">if ticket Not Found </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TicketController.ReplyTicket(DevTools.Application.Tickets.Command.ReplyTicketCommand.ReplyTicketCommand)">
+            <summary>
+            Reply Ticket By Admin 
+            </summary>
+            <param name="replyTicketCommand"></param>
+            <returns>Reply Ticket </returns>
+            <response code="201">if ticket Reply successfully </response>
+            <response code="404">if ticket Not Found </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TicketController.Delete(System.Guid)">
+            <summary>
+            Delete Ticket
+            </summary>
+            <param name="id"></param>
+            <returns>Delete Ticket </returns>
+            <response code="200">if ticket Delete successfully </response>
+            <response code="404">if ticket Not Found </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TicketController.EditTicket(DevTools.Application.Tickets.Command.EditTicketCommand.EditTicketCommand)">
+            <summary>
+            Edit Your Reply Ticket
+            </summary>
+            <param name="editTicketCommand"></param>
+            <returns>Edit Your Reply Ticket </returns>
+            <response code="200">if ticket Edit successfully </response>
+            <response code="404">if ticket Not Found </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.TransactionController.GetTransaction(DevTools.Application.Transactions.Queries.GetTransactionPagedListQuery)">
+            <summary>
+            transaction List
+            </summary>
+            <param name="transactionPagedList"></param>
+            <returns>User List</returns>
+            <response code="200">if Get List successfully </response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:DevTools.Api.Areas.Admin.UsersController.GetList(DevTools.Common.General.PagingOptions)">
             <summary>
             User List
@@ -28,7 +109,6 @@
             <param name="pagingOptions"></param>
             <returns>User List</returns>
             <response code="200">if Get List successfully </response>
-            <response code="404">If entity not found.</response>
             <response code="500">If an unexpected error happen</response>
         </member>
         <member name="M:DevTools.Api.Areas.Admin.UsersController.GetUser(System.Guid)">
@@ -72,6 +152,35 @@
             <response code="404">If entity not found.</response>
             <response code="500">If an unexpected error happen</response>
         </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.GetUserGroupTemplate(System.Guid,DevTools.Common.General.PagingOptions)">
+            <summary>
+            Return list of Group Template For User
+            </summary>
+            <param name="id"></param>
+            <param name="pagingOptions"></param>
+            <response code="200">Group Template List </response>
+            <response code="404">If entity not found.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.GetUserGroupTemplate(System.Guid,System.Guid)">
+            <summary>
+            Return list of templates for user
+            </summary>
+            <param name="id"></param>
+            <param name="groupId"></param>
+            <response code="200"> Template List </response>
+            <response code="404">If user not found or template.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Admin.UsersController.GetUserApplication(System.Guid)">
+            <summary>
+            Return list of Application Register 
+            </summary>
+            <param name="id"></param>
+            <response code="200"> Application List </response>
+            <response code="404">If user not found .</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:DevTools.Api.Areas.Common.AccountController.Login(DevTools.Application.Account.Auth.Command.LoginCommand)">
             <summary>
             login to Panel
@@ -80,6 +189,33 @@
             <returns>Access and refresh token.</returns>
             <response code="200">if login successfully </response>
             <response code="400">If validation failure.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Common.AccountController.ForgetPassword(DevTools.Application.Account.Auth.Command.ForgetPassword.ForgetPasswordCommand)">
+            <summary>
+            Forget Password
+            </summary>
+            <param name="forgetPasswordCommand"></param>
+            <returns>Send Email For Forget Password</returns>
+            <response code="200">if forget Password send successfully </response>
+            <response code="400">If validation failure.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Common.AccountController.ChangePassword(DevTools.Application.Account.Auth.Command.ChangePassword.ChangePasswordCommand)">
+            <summary>
+            Change Password
+            </summary>
+            <param name="changePasswordCommand"></param>
+            <returns>To Change Your Current Password</returns>
+            <response code="200">if Password successfully change </response>
+            <response code="400">If validation failure or current password wrong.</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:DevTools.Api.Areas.Common.AccountController.Profile">
+            <summary>
+            See Your Profile Info
+            </summary>
+            <response code="200">profile detail </response>
             <response code="500">If an unexpected error happen</response>
         </member>
         <member name="T:DevTools.Api.Middleware.OnExceptionMiddleware">

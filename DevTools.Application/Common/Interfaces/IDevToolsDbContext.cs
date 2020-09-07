@@ -17,7 +17,7 @@ namespace DevTools.Application.Common.Interfaces
         DbSet<GroupTest> GroupTests { get; set; }
         DbSet<Ticket> Tickets { get; set; }
         DbSet<Setting> Settings { get; set; }
-
+        DbSet<Transaction> Transactions { get; set; }
         Task SaveAsync(CancellationToken cancellationToken);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace DevTools.Common.General
+﻿using System.Net.NetworkInformation;
+
+namespace DevTools.Common.General
 {
     public class ResponseMessage
     {
@@ -24,5 +26,20 @@
 
         public const string UpdateSettingSuccessfully = "update setting Successfull";
 
+        public const string TicketWasNotFound = "the ticket was not found";
+
+        public const string TicketEditSuccessfully = "the ticket Edit successfully";
+
+        public const string ChangeNotAllowed = "you are only allowed to delete your Reply ";
+
+        public const string WrongPassword = "wrong password please try again";
+
+        public const string PasswordRecentlyUsed = "this password recently used plaese pick an other on";
+
+        public const string PasswordChangeSuccessfully = "the password change successfully";
+
+        public const string ForgetPasswordSentSuccessfully = "forget password sent to your account successfully";
+
+        public const string TemplateNotFound = "the template was not found";
     }
 }

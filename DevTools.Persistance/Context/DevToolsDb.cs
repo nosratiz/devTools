@@ -26,6 +26,7 @@ namespace DevTools.Persistence.Context
         public virtual DbSet<GroupTest> GroupTests { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public Task SaveAsync(CancellationToken cancellationToken) => base.SaveChangesAsync(cancellationToken);
 

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using DevTools.Application.Common.Interfaces;
+using DevTools.Application.Common.Service;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,7 @@ namespace DevTools.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddTransient<IMediator, Mediator>();
+            services.AddTransient<IEmailServices, EmailServices>();
 
 
             #region Api Behavior
