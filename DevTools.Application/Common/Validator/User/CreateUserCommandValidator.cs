@@ -44,7 +44,7 @@ namespace DevTools.Application.Common.Validator.User
 
         private async Task<bool> ValidRole(CreateUserCommand createUserCommand, CancellationToken cancellationToken)
         {
-            return !await _context.Roles.AnyAsync(x => x.Id == createUserCommand.RoleId, cancellationToken);
+            return await _context.Roles.AnyAsync(x => x.Id == createUserCommand.RoleId, cancellationToken);
         }
 
 

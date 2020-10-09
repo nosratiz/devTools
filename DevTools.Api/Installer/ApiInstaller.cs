@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using AutoMapper;
+using DevTools.Api.Middleware;
 using DevTools.Application.Common.AutoMapper;
 using DevTools.Application.Common.Interfaces;
 using DevTools.Common.Options;
@@ -32,7 +33,7 @@ namespace DevTools.Api.Installer
                     });
             });
 
-            services.AddControllers()
+            services.AddControllers(opt => { opt.Filters.Add<OnExceptionMiddleware>(); })
                 .AddFluentValidation(mvcConfiguration =>
              mvcConfiguration.RegisterValidatorsFromAssemblyContaining<IDevToolsDbContext>());
 
@@ -56,7 +57,7 @@ namespace DevTools.Api.Installer
             services.AddHangfireServer();
 
             #endregion HangFire
-        
+
             #region AuthToken
 
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));

@@ -40,7 +40,7 @@ namespace DevTools.Api.Areas.Admin
         /// <response code="200">get Template back</response>
         ///  <response code="404">if template not found </response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(TemplateListDto), 200)]
+        [ProducesResponseType(typeof(TemplateDto), 200)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("{id}")]
@@ -58,7 +58,7 @@ namespace DevTools.Api.Areas.Admin
         /// <response code="204">get Template back</response>
         ///  <response code="404">if template not found </response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(TemplateListDto), 204)]
+        [ProducesResponseType(204)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpDelete("{id}")]

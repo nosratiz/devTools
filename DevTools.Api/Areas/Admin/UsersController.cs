@@ -6,6 +6,7 @@ using DevTools.Application.Templates.Queries;
 using DevTools.Application.UserApplications.Dto;
 using DevTools.Application.UserApplications.Queries;
 using DevTools.Application.Users.Command.CreateUser;
+using DevTools.Application.Users.Command.DeleteMultipleUser;
 using DevTools.Application.Users.Command.DeleteUser;
 using DevTools.Application.Users.Command.UpdateUser;
 using DevTools.Application.Users.Model;
@@ -194,6 +195,15 @@ namespace DevTools.Api.Areas.Admin
         public async Task<IActionResult> GetUserApplication(Guid id)
         {
             var result = await _mediator.Send(new GetUserApplicationListQuery { UserId = id });
+
+            return result.ApiResult;
+        }
+
+
+        [HttpPut("DeleteMultiple")]
+        public async Task<IActionResult> DeleteMultiple(DeleteMultipleUserCommand deleteMultipleUserCommand)
+        {
+            var result = await _mediator.Send(deleteMultipleUserCommand);
 
             return result.ApiResult;
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoMapper;
+using DevTools.Application.Settings.Command;
+using DevTools.Application.Settings.Model;
 using DevTools.Application.Templates.Dto;
 using DevTools.Application.Tickets.Command.ReplyTicketCommand;
 using DevTools.Application.Tickets.ModelDto;
@@ -21,6 +23,8 @@ namespace DevTools.Application.Common.AutoMapper
         {
 
             CreateMap<User, UserDto>()
+                .ForMember(x => x.RegisterDate, opt => opt.MapFrom(des => des.RegisterDate.ToString("g")))
+                .ForMember(x => x.FullName, opt => opt.MapFrom(des => $"{des.Name} {des.Family}"))
                 .ForMember(x => x.RoleName, opt => opt.MapFrom(des => des.Role.Name));
 
             CreateMap<CreateUserCommand, User>()
@@ -53,12 +57,19 @@ namespace DevTools.Application.Common.AutoMapper
 
             CreateMap<Template, TemplateDto>();
 
-            CreateMap<Transaction, TransactionDto>();
+            CreateMap<Transaction, TransactionDto>()
+                .ForMember(x => x.FullName, opt => opt.MapFrom(des => $"{des.User.Name} {des.User.Family}"))
+                .ForMember(x => x.Email, opt => opt.MapFrom(des => des.User.Email))
+                .ForMember(x => x.Mobile, opt => opt.MapFrom(des => des.User.Mobile));
 
             CreateMap<Template, TemplateListDto>()
                 .ForMember(x => x.FullName,
                     opt => opt.MapFrom(des => $"{des.GroupTemplate.User.Name} {des.GroupTemplate.User.Family}"))
                 .ForMember(x => x.GroupName, opt => opt.MapFrom(des => des.GroupTemplate.Name));
+
+            CreateMap<UpdateSettingCommand, Setting>();
+
+            CreateMap<Setting, SettingDto>();
         }
     }
 }

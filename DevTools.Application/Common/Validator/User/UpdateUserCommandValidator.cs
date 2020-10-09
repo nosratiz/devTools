@@ -15,6 +15,9 @@ namespace DevTools.Application.Common.Validator.User
         public UpdateUserCommandValidator(IDevToolsDbContext context)
         {
             _context = context;
+            CascadeMode = CascadeMode.Stop;
+
+            RuleFor(dto => dto.Id).NotEmpty().NotNull();
 
             RuleFor(dto => dto.Email).NotEmpty().EmailAddress();
 
@@ -46,7 +49,7 @@ namespace DevTools.Application.Common.Validator.User
 
         private async Task<bool> ValidRole(UpdateUserCommand updateUserCommand, CancellationToken cancellationToken)
         {
-            return !await _context.Roles.AnyAsync(x => x.Id == updateUserCommand.RoleId, cancellationToken);
+            return await _context.Roles.AnyAsync(x => x.Id == updateUserCommand.RoleId, cancellationToken);
         }
     }
 }

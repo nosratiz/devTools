@@ -13,15 +13,15 @@ namespace DevTools.Application.Common.Service
     {
         private readonly EmailSetting _emailSetting;
 
-        public EmailServices(IOptionsSnapshot<EmailSetting> emailSetting)
+        public EmailServices(IOptionsMonitor<EmailSetting> emailSetting)
         {
             _emailSetting = new EmailSetting
             {
-                Host = emailSetting.Value.Host,
-                UserName = emailSetting.Value.UserName,
-                Password = emailSetting.Value.Password,
-                Port = emailSetting.Value.Port,
-                From = emailSetting.Value.From
+                Host = emailSetting.CurrentValue.Host,
+                UserName = emailSetting.CurrentValue.UserName,
+                Password = emailSetting.CurrentValue.Password,
+                Port = emailSetting.CurrentValue.Port,
+                From = emailSetting.CurrentValue.From
             };
         }
 

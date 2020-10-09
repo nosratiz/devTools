@@ -9,9 +9,11 @@ namespace DevTools.Application.Users.Model
         public string RoleName { get; set; }
         public string Name { get; set; }
         public string Family { get; set; }
+
+        public string FullName { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
         public double Wallet { get; set; }
-        public DateTime RegisterDate { get; set; }
+        public string RegisterDate { get; set; }
     }
 }

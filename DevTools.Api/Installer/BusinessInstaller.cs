@@ -2,6 +2,7 @@
 using DevTools.Application.Common.Interfaces;
 using DevTools.Application.Common.Service;
 using DevTools.Common.Helper;
+using DevTools.Common.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace DevTools.Api.Installer
             services.AddTransient<ITokenGenerator, TokenGenerator>();
 
             services.AddTransient<ICurrentUserService, CurrentUserService>();
+            services.Configure<EmailSetting>(configuration.GetSection("EmailSetting"));
         }
     }
 }
